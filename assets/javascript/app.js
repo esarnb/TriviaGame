@@ -6,58 +6,86 @@ var answers = $("#answers");
 
 //Questions
 
-var questions = {
-    q1: {
+var questions = [
+    {
+        prompt: "q1",
+        ans: ["a","b","c"],
+        correct: 1
+    },
+    {
+        prompt: "q2",
+        ans: ["a","b","c"],
+        correct: 2
+    },
+    {
         prompt: "",
         ans: [""],
         correct: 0
     },
-    q2: {
+    {
         prompt: "",
         ans: [""],
         correct: 0
     },
-    q3: {
+    {
         prompt: "",
         ans: [""],
         correct: 0
     },
-    q4: {
+    {
         prompt: "",
         ans: [""],
         correct: 0
     },
-    q5: {
+    {
         prompt: "",
         ans: [""],
         correct: 0
     },
-    q6: {
+    {
         prompt: "",
         ans: [""],
         correct: 0
     },
-    q7: {
+    {
         prompt: "",
         ans: [""],
         correct: 0
     },
-    q8: {
-        prompt: "",
-        ans: [""],
-        correct: 0
-    },
-    q9: {
-        prompt: "",
-        ans: [""],
-        correct: 0
-    },
-    q10: {
+    {
         prompt: "",
         ans: [""],
         correct: 0
     }
+];
+
+function beginGame(i) {
+
+    time.text("30:00")
+    question.text(questions[i].prompt)
+    answers.text(questions[i].ans.join(" "))
+
+    time.fadeIn("slow")
+    // correction.fadeIn("slow")
+    question.fadeIn("slow")
+    answers.fadeIn("slow")
 }
+
+function setupGame() {
+    time.fadeOut("fast")
+    correction.fadeOut("fast")
+    question.fadeOut("fast")
+    answers.fadeOut("fast")
+}
+
+
+$(document).ready(function() {
+    $("#begin").on("click", function() {
+        $(this).fadeOut("slow");
+    
+        beginGame(0);
+    })
+})  
 
 
 /**
