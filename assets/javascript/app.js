@@ -4,7 +4,7 @@ var correction = $("#correction");
 var question = $("#question");
 var answers = $( "label" );
 var position = 0;
-var countdownInterval, counterNumber = 30;
+var countdownInterval;
 
 //Questions
 var questions = [
@@ -60,65 +60,105 @@ var questions = [
     }
 ];
 
-function beginGame(i) {
-    //Assign new texts to Q & A
+/**
+ * Function begins showing the first Q&A and timer, 
+ * fades in necessary elements for viewer.
+ */
+function beginGame() {
+    
+    //Start Countdown, pass in first Q's position incase of timeout
+    beginCountdown(0)
+    
+    //Start showing Q  & A
+    time.fadeIn("slow")
+    answers.fadeIn("slow")
+    question.fadeIn("slow")
+
+    answers.css("visibility", "visible")
+}
+
+/**
+ * 
+ * @param {Integer} i is the question/answer object the game is currently on.
+ * 
+ * Function updates the user with a new question and a set of answers
+ */
+function updateQuestion(i) {
     question.text(questions[i].prompt)
+
     answers.each(function(j, obj) {
         $(this).text(questions[i].ans[j])
     })
-
-    //Start Countdown and save QuestionPosition i
-    beginCountdown(i)
-    
-    //Start showing Q  & A
-    answers.css("visibility", "visible")
-    answers.fadeIn("slow")
-
-    question.fadeIn("slow")
-    time.fadeIn("slow")
 }
 
-function setupGame() {
-    time.fadeOut("fast")
-    correction.fadeOut("fast")
-    question.fadeOut("fast")
-    answers.fadeOut("fast")    
-}
-
+/**
+ * 
+ * @param {Integer} i Current Q&A object the game is displaying.
+ * 
+ * Param i is used to get the correct answer for the specific question.
+ * Function fades in "out of time" prompt, and for 5s shows the correct answer.
+ *  Then, a new question is displayed with a reset timer.
+ *  When the last question is answered, the game ends.
+ */
 function outOfTime(i) {
     correction.fadeIn("slow")
     correction.html("Oh No! You ran out of time! <br />The correct answer was: " + questions[i].ans[questions[i].correct])
+    
     setTimeout(function() {
         if (position < questions.length) {
             position++;
-            beginGame(position)
+            //Run the next question and new counter
+            updateQuestion(position)
             beginCountdown(position)
-            counterNumber = 30;
             correction.html("")
+        }
+        else {
+            endGame()
         }
     }, 5000)
 }
 
+/**
+ * 
+ * @param {Integer} i Current Q&A object the game is displaying.
+ * 
+ * Param i is passed into OutOfTime to show the correct answer on timeout.
+ * Function starts a timer of 30s, once it runs out, OutOfTime is called to
+ *  update the user of the current (param i) answer. Timer stops for this period.
+ */
 function beginCountdown(i) {
-    clearInterval(countdownInterval);
+    
+    var counterNumber = 30;
+
+    //Set a new counter per question
     countdownInterval = setInterval(function(){
         if (counterNumber > 0) {
             counterNumber--;
             time.text("Time Remaining: " + counterNumber + "s");
         }
         else {
-            outOfTime(i)
+            outOfTime(i) //Run Question correct answer on question[i]
             clearInterval(countdownInterval);
         }
     }, 1000)
 }
 
+/**
+ * Function clears the Q&A screen, shows stats and
+ *  asks the user to play again. If yes, obj position
+ * is ran again. Else, main menu is shown.
+ */
+function endGame() {
+    //Clear all, display PlayAgain message and stats.
+
+    //if they say yes, run questions again with position=0
+
+    //else run a page refresh to show main menu.
+}
+
 $(document).ready(function() {
-    setupGame()
     $("#begin").on("click", function() {
         $(this).fadeOut("slow");
-        console.log(this);
-        
         beginGame(position);
     })
 })  
@@ -129,17 +169,8 @@ $(document).ready(function() {
  */
 //Setup Main Menu
 
-//Begin game using SetupFunction 
-
-    //Begin counter
-
-    //Show Q1 using QuestionFunction
-
     //onClick, run show correct answer
         //Highlight correct position of arrIndex
-
-    //Move to Q2 and repeat above and reset timer 
-
 
     //After Q10 shown, show results. Pause.
 
