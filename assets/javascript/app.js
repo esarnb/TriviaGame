@@ -2,19 +2,19 @@
 var time = $("#time");
 var correction = $("#correction");
 var question = $("#question");
-var answers = $("#answers");
+var answers = $( "label" );
+var position = 0;
 
 //Questions
-
 var questions = [
     {
         prompt: "q1",
-        ans: ["a","b","c"],
+        ans: ["a","b","c","d"],
         correct: 1
     },
     {
         prompt: "q2",
-        ans: ["a","b","c"],
+        ans: ["1","2","3","4"],
         correct: 2
     },
     {
@@ -60,11 +60,16 @@ var questions = [
 ];
 
 function beginGame(i) {
-
-    time.text("30:00")
+    //Assign new texts to Q & A
     question.text(questions[i].prompt)
-    answers.text(questions[i].ans.join(" "))
+    answers.each(function(j, obj) {
+        $(this).text(questions[i].ans[j])
+    })
 
+    //Start Countdown
+    
+    //Start showing Q  & A
+    $("label").css("visibility", "visible")
     time.fadeIn("slow")
     // correction.fadeIn("slow")
     question.fadeIn("slow")
@@ -76,14 +81,18 @@ function setupGame() {
     correction.fadeOut("fast")
     question.fadeOut("fast")
     answers.fadeOut("fast")
+    console.log(answers.length);
+    
 }
 
 
 $(document).ready(function() {
+    setupGame()
     $("#begin").on("click", function() {
         $(this).fadeOut("slow");
-    
-        beginGame(0);
+        console.log(this);
+        
+        beginGame(position);
     })
 })  
 

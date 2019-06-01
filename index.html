@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Trivia Game</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" src="assets/css/reset.css">
-    <link rel="stylesheet" type="text/css" src="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
     <!-- https://github.com/esarnb/TriviaGame -->
@@ -27,8 +27,26 @@
 
         <h2 id="question"></h2>
 
-        <h3 id="answers"></h3>
-
+        <form>
+            <ul>
+                <li>
+                    <input type="radio" value="a" name="q" class="ans" id="AnsA"/>
+                    <label for="AnsA">A</label>
+                </li>
+                <li>
+                    <input type="radio" value="b" name="q" class="ans" id="AnsB"/>
+                    <label for="AnsB">B</label>
+                </li>
+                <li>
+                    <input type="radio" value="c" name="q" class="ans" id="AnsC"/>
+                    <label for="AnsC">C</label>
+                </li>
+                <li>
+                    <input type="radio" value="d" name="q" class="ans" id="AnsD"/>
+                    <label for="AnsD">D</label>
+                </li>
+            </ul>
+        </form>
     </div>
 
     <script src="assets/javascript/app.js"></script>
