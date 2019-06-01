@@ -4,6 +4,7 @@ var correction = $("#correction");
 var question = $("#question");
 var answers = $( "label" );
 var position = 0;
+var countdownInterval, counterNumber = 30;
 
 //Questions
 var questions = [
@@ -66,25 +67,51 @@ function beginGame(i) {
         $(this).text(questions[i].ans[j])
     })
 
-    //Start Countdown
+    //Start Countdown and save QuestionPosition i
+    beginCountdown(i)
     
     //Start showing Q  & A
-    $("label").css("visibility", "visible")
-    time.fadeIn("slow")
-    // correction.fadeIn("slow")
-    question.fadeIn("slow")
+    answers.css("visibility", "visible")
     answers.fadeIn("slow")
+
+    question.fadeIn("slow")
+    time.fadeIn("slow")
 }
 
 function setupGame() {
     time.fadeOut("fast")
     correction.fadeOut("fast")
     question.fadeOut("fast")
-    answers.fadeOut("fast")
-    console.log(answers.length);
-    
+    answers.fadeOut("fast")    
 }
 
+function outOfTime(i) {
+    correction.fadeIn("slow")
+    correction.html("Oh No! You ran out of time! <br />The correct answer was: " + questions[i].ans[questions[i].correct])
+    setTimeout(function() {
+        if (position < questions.length) {
+            position++;
+            beginGame(position)
+            beginCountdown(position)
+            counterNumber = 30;
+            correction.html("")
+        }
+    }, 5000)
+}
+
+function beginCountdown(i) {
+    clearInterval(countdownInterval);
+    countdownInterval = setInterval(function(){
+        if (counterNumber > 0) {
+            counterNumber--;
+            time.text("Time Remaining: " + counterNumber + "s");
+        }
+        else {
+            outOfTime(i)
+            clearInterval(countdownInterval);
+        }
+    }, 1000)
+}
 
 $(document).ready(function() {
     setupGame()
