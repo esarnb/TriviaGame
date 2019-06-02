@@ -3,7 +3,7 @@ var time = $("#time");
 var correction = $("#correction");
 var question = $("#question");
 var answers = $( "label" );
-var position = 0, countdownInterval, endTheGame = false;
+var position = -1, countdownInterval, endTheGame = false;
 
 
 //Questions
@@ -95,6 +95,7 @@ function beginGame() {
 }
 
 function updateQuestion() {
+    position++;
     if (position < questions.length) {
         endTheGame = false;
         
@@ -106,7 +107,6 @@ function updateQuestion() {
 
         beginCountdown()
         correction.html("")
-        position++;
     }
     else {
         endGame()
