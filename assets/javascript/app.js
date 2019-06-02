@@ -3,8 +3,8 @@ var time = $("#time");
 var correction = $("#correction");
 var question = $("#question");
 var answers = $( "label" );
-var position = 0;
-var countdownInterval;
+var position = 0, countdownInterval, endTheGame = false;
+
 
 //Questions
 var questions = [
@@ -60,14 +60,10 @@ var questions = [
     }
 ];
 
-/**
- * Function begins showing the first Q&A and timer, 
- * fades in necessary elements for viewer.
- */
 function beginGame() {
     
-    //Start Countdown, pass in first Q's position incase of timeout
-    beginCountdown(0)
+    updateQuestion();
+    beginCountdown();
     
     //Start showing Q  & A
     time.fadeIn("slow")
@@ -75,59 +71,51 @@ function beginGame() {
     question.fadeIn("slow")
 
     answers.css("visibility", "visible")
-}
-
-/**
- * 
- * @param {Integer} i is the question/answer object the game is currently on.
- * 
- * Function updates the user with a new question and a set of answers
- */
-function updateQuestion(i) {
-    question.text(questions[i].prompt)
-
-    answers.each(function(j, obj) {
-        $(this).text(questions[i].ans[j])
-    })
-}
-
-/**
- * 
- * @param {Integer} i Current Q&A object the game is displaying.
- * 
- * Param i is used to get the correct answer for the specific question.
- * Function fades in "out of time" prompt, and for 5s shows the correct answer.
- *  Then, a new question is displayed with a reset timer.
- *  When the last question is answered, the game ends.
- */
-function outOfTime(i) {
-    correction.fadeIn("slow")
-    correction.html("Oh No! You ran out of time! <br />The correct answer was: " + questions[i].ans[questions[i].correct])
     
-    setTimeout(function() {
-        if (position < questions.length) {
-            position++;
-            //Run the next question and new counter
-            updateQuestion(position)
-            beginCountdown(position)
-            correction.html("")
+    $(".ans").on("click", function() {
+        var choice = parseInt(this.value);
+        
+        if (!endTheGame) {
+            if (choice === questions[position].correct) {
+                console.log("Correct!");
+                correction.text("Correct!")
+            }
+            else {
+                console.log("Oops! Incorrect!");
+                correction.text("Oops! Incorrect!")
+            }
+
+            endTheGame = true;
+            clearInterval(countdownInterval);
+            setTimeout(function() {
+                updateQuestion()
+            }, 5000)
         }
-        else {
-            endGame()
-        }
-    }, 5000)
+    });
 }
 
-/**
- * 
- * @param {Integer} i Current Q&A object the game is displaying.
- * 
- * Param i is passed into OutOfTime to show the correct answer on timeout.
- * Function starts a timer of 30s, once it runs out, OutOfTime is called to
- *  update the user of the current (param i) answer. Timer stops for this period.
- */
-function beginCountdown(i) {
-    
+function updateQuestion() {
+    if (position < questions.length) {
+        endTheGame = false;
+        
+        question.text(questions[position].prompt)
+        
+        answers.each(function(j, obj) {
+            $(this).text(questions[position].ans[j])
+        })
+
+        beginCountdown()
+        correction.html("")
+        position++;
+    }
+    else {
+        endGame()
+    }
+}
+
+function beginCountdown() {
+    //Reset existing interval
+    clearInterval(countdownInterval);
     var counterNumber = 30;
 
     //Set a new counter per question
@@ -137,8 +125,13 @@ function beginCountdown(i) {
             time.text("Time Remaining: " + counterNumber + "s");
         }
         else {
-            outOfTime(i) //Run Question correct answer on question[i]
+            correction.fadeIn("slow")
+            correction.html("Oh No! You ran out of time! <br />The correct answer was: " + questions[i].ans[questions[i].correct])
             clearInterval(countdownInterval);
+            
+            setTimeout(function() {
+                updateQuestion()
+            }, 5000)
         }
     }, 1000)
 }
@@ -149,6 +142,8 @@ function beginCountdown(i) {
  * is ran again. Else, main menu is shown.
  */
 function endGame() {
+    //Gate to stop clicks
+    endTheGame = true;
     //Clear all, display PlayAgain message and stats.
 
     //if they say yes, run questions again with position=0
@@ -159,7 +154,7 @@ function endGame() {
 $(document).ready(function() {
     $("#begin").on("click", function() {
         $(this).fadeOut("slow");
-        beginGame(position);
+        beginGame();
     })
 })  
 
