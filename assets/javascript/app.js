@@ -126,7 +126,7 @@ function beginCountdown() {
         }
         else {
             correction.fadeIn("slow")
-            correction.html("Oh No! You ran out of time! <br />The correct answer was: " + questions[i].ans[questions[i].correct])
+            correction.html("Oh No! You ran out of time! <br />The correct answer was: " + questions[position].ans[questions[position].correct])
             clearInterval(countdownInterval);
             
             setTimeout(function() {
