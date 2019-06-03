@@ -4,7 +4,7 @@ var correction = $("#correction");
 var question = $("#question");
 var answers = $( "label" );
 var countdownInterval, endTheGame = false;
-var correct = 0, position = -1;
+var wins = 0, position = -1;
 
 //Questions
 var questions = [
@@ -77,10 +77,15 @@ function beginGame() {
         
         if (!endTheGame) {
             if (choice === questions[position].correct) {
-                correction.text("Correct!")
+                // correction.text("Correct!")
+                wins++;
+            correction.html("Correct!  " + questions[position].ans[questions[position].correct - 1])
+
             }
             else {
-                correction.text("Oops! Incorrect!")
+                // correction.text("Oops! Incorrect!")
+            correction.html("Incorrect :c <br />The correct answer was: " + questions[position].ans[questions[position].correct - 1])
+
             }
             
             endTheGame = true;
@@ -124,7 +129,7 @@ function beginCountdown() {
         }
         else {
             correction.fadeIn("slow")
-            correction.html("Oh No! You ran out of time! <br />The correct answer was: " + questions[position].ans[questions[position].correct])
+            correction.html("Oh No! You ran out of time! <br />The correct answer was: " + questions[position].ans[questions[position].correct - 1])
             clearInterval(countdownInterval);
             
             setTimeout(function() {
@@ -156,17 +161,10 @@ $(document).ready(function() {
         $(this).fadeOut("slow");
         beginGame();
     })
-})  
+})
 
 
-/**
- * PseudoCode
- */
-//Setup Main Menu
 
-    //onClick, run show correct answer
-        //Highlight correct position of arrIndex
 
-    //After Q10 shown, show results. Pause.
-
-    //onClick playAgain, run SetupFunction
+/*CodePen by Tiffany Rayside (https://codepen.io/tmrDevelops/pen/epeBGa)*/
+var _3DPretty=function(){var t,n,i,e,o,h=[],a=0,s=0,r=0,d=0,c=500,u=function(){e=.5*window.innerWidth,o=.5*window.innerHeight},f=function(){window.requestAnimationFrame(f),l()},M=function(a){for(var s=0;s<c;s++){var r={};r.p=document.createElement("span"),t.appendChild(r.p);var d,u,f,M=s/c;d=s%(.5*c),u=Math.floor(d)/100+Math.floor(d/2)%10/5*Math.PI*2,f=Math.acos(d%4*.6-.9),M=a?a(M):M-M*M+.5;var l=Math.sin(f)*M;r.x=Math.sin(u)*l,r.y=Math.cos(u)*l,r.z=Math.cos(f)*M,h.push(r),r.transform=function(){var t=.02*n,h=.02*i,a=Math.cos(t),s=Math.sin(t),r=Math.cos(h),d=Math.sin(h),c=this.y*s+this.z*a;this.y=this.y*a+this.z*-s,this.z=this.x*-d+c*r,this.x=this.x*r+c*d;var u=1/(1+this.z),f=this.x*u*o+e-2*u,M=this.y*u*o+o-2*u,l=this.p.style;if(f>=0&&M>=0&&f<2*e&&M<2*o){Math.round(256+256*-this.z);l.left=Math.round(f)+"px",l.top=Math.round(M)+"px",l.width=Math.round(2*u)+"px",l.height=Math.round(2*u)+"px",l.background="hsla("+M+",80%,80%,1)",l.zIndex=200+Math.floor(100*-this.z)}else l.width="0px"}}},l=function(){var t=1/o;r+=n=(s-r)*t,d+=i=(a-d)*t;for(var e,c=0;e=h[c];c++)e.transform()};return{set:function(n,i){n&&(c=n),t=document.getElementById("space"),window.addEventListener("mousemove",function(t){a=t.clientX,s=t.clientY}),window.addEventListener("touchmove",function(t){t.preventDefault(),a=t.touches[0].clientX,s=t.touches[0].clientY}),u(),window.addEventListener("resize",u),M(i),f()}}}();window.onload=function(){_3DPretty.set(500,function(t){return t*t})};

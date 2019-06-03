@@ -1,15 +1,9 @@
-body {
-    background-image: url("../images/stars.gif");
-    background-repeat: no-repeat;
-    background-size: cover;
-}
 .container {
     margin: auto;
     width: 50%;
-    border: 3px solid green;
     padding: 10px;
     position: fixed;
-    top: 30%;
+    top: 20%;
     left: 25%;
     right: 25%;
     text-align: center;
@@ -25,6 +19,8 @@ ul {
 
 li {
     margin: 25px 0px;
+    font-family: 'Merienda', cursive;
+    font-size: 20px;
 }
 
 input {
@@ -39,7 +35,60 @@ label {
 }
 
 label:hover {
-    /* background-color: #baffe4; */
     opacity: 1;
     color: #00ffff;
+    font-weight: bolder;
 }
+header {
+    font-family: 'Pacifico', cursive;
+    margin-bottom: 40px;
+    font-size: 50px;
+}
+
+#question {
+    font-family: 'Permanent Marker', cursive;
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+#time {
+    font-family: 'Kaushan Script', cursive;
+    font-size: 25px;
+}
+
+#correction {
+    font-size: 30px;
+    font-family: 'Permanent Marker', cursive;
+}
+
+
+
+
+
+
+/*CodePen by Tiffany Rayside (https://codepen.io/tmrDevelops/pen/epeBGa)*/
+html {
+    overflow: hidden;
+    background: hsla(0, 0%, 0%, 1);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-image: radial-gradient(top, circle cover, hsla(330, 90%, 15%, 1) 20%, hsla(0, 0%, 0%, 1) 80%);
+}
+  
+  body,
+  .space {
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+  
+  #space {
+    left: 0;
+    top: 0;
+    zoom: 1;
+    z-index: -1;
+  }
+  
+  #space span {
+    position: absolute;
+  }
