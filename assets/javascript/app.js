@@ -3,60 +3,60 @@ var time = $("#time");
 var correction = $("#correction");
 var question = $("#question");
 var answers = $( "label" );
-var position = -1, countdownInterval, endTheGame = false;
-
+var countdownInterval, endTheGame = false;
+var correct = 0, position = -1;
 
 //Questions
 var questions = [
     {
-        prompt: "q1",
-        ans: ["a","b","c","d"],
-        correct: 1
-    },
-    {
-        prompt: "q2",
-        ans: ["1","2","3","4"],
+        prompt: "Which planet is named after the Roman god of war?",
+        ans: ["Mercury","Mars","Jupiter","Saturn"],
         correct: 2
     },
     {
-        prompt: "",
-        ans: [""],
-        correct: 0
+        prompt: "Who was the first person in space?",
+        ans: ["Valentina Tereshkova","Alan Shepard","Yuri Alekseyevich Gagarin","Neil Armstrong"],
+        correct: 3
     },
     {
-        prompt: "",
-        ans: [""],
-        correct: 0
+        prompt: "Which planet has a longer day than Earth or any other planet in our solar  system?",
+        ans: ["Mercury", "Venus", "Jupiter", "Saturn"],
+        correct: 2
     },
     {
-        prompt: "",
-        ans: [""],
-        correct: 0
+        prompt: "Which animal was the first to go into space?",
+        ans: ["Félicette the cat", "Two Russian tortoises", "Ham the Chimpanzee", "Laika the dog"],
+        correct: 4
     },
     {
-        prompt: "",
-        ans: [""],
-        correct: 0
+        prompt: "What is the furthest object visible to the human eye?",
+        ans: ["Andromeda Galaxy", "Dreyer Nebula", "Polaris Star", "Galaxy GN-z11"],
+        correct: 1
     },
     {
-        prompt: "",
-        ans: [""],
-        correct: 0
+        prompt: "How much time does it take for sun rays to reach Earth?",
+        ans: ["6 minutes", "10 minutes", "8 minutes", "12 minutes"],
+        correct: 3
     },
     {
-        prompt: "",
-        ans: [""],
-        correct: 0
+        prompt: "What is the hottest planet in our solar system?",
+        ans: ["Venus", "Mercury", "Mars", "Jupiter"],
+        correct: 1
     },
     {
-        prompt: "",
-        ans: [""],
-        correct: 0
+        prompt: "What is the coldest place in the universe?",
+        ans: ["Dark Doodad Nebula", "Boomerang Nebula", "Double Helix Nebula", "Lemon Slice Nebula"],
+        correct: 2
     },
     {
-        prompt: "",
-        ans: [""],
-        correct: 0
+        prompt: "Which is the closest star to the Sun?",
+        ans: ["Alpha Centauri", "Sirius", "Polaris", "Proxima Centauri"],
+        correct: 4
+    },
+    {
+        prompt: "What flavor ice cream did Baskin-Robbins release in 1969 to commemorate America’s landing on the moon?",
+        ans: ["Milky Way Midnight", "Star Light Mint", "Lunar Cheesecake", "Astronaut Ice Cream"],
+        correct: 3
     }
 ];
 
@@ -77,11 +77,9 @@ function beginGame() {
         
         if (!endTheGame) {
             if (choice === questions[position].correct) {
-                console.log("Correct!");
                 correction.text("Correct!")
             }
             else {
-                console.log("Oops! Incorrect!");
                 correction.text("Oops! Incorrect!")
             }
 
