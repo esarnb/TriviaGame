@@ -82,7 +82,7 @@ function beginGame() {
             else {
                 correction.text("Oops! Incorrect!")
             }
-
+            
             endTheGame = true;
             clearInterval(countdownInterval);
             setTimeout(function() {
@@ -143,7 +143,9 @@ function endGame() {
     //Gate to stop clicks
     endTheGame = true;
     //Clear all, display PlayAgain message and stats.
-
+    correction.empty()
+    question.empty()
+    answers.empty()
     //if they say yes, run questions again with position=0
 
     //else run a page refresh to show main menu.

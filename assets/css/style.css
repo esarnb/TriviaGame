@@ -1,5 +1,22 @@
 body {
-    
+    background-image: url("../images/stars.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+    position: fixed;
+    top: 30%;
+    left: 25%;
+    right: 25%;
+    text-align: center;
+}
+
+* {
+    color: cyan;
 }
 
 ul {
@@ -7,8 +24,7 @@ ul {
 }
 
 li {
-    /* display: inline-block; */
-    margin: 15px 0px;
+    margin: 25px 0px;
 }
 
 input {
@@ -18,8 +34,12 @@ input {
 label {
     visibility:hidden;
     cursor: pointer;
+    padding: 1.3% 15%;
+    opacity: 0.6
 }
 
-input:checked + label {
-    background: red;
+label:hover {
+    /* background-color: #baffe4; */
+    opacity: 1;
+    color: #00ffff;
 }
