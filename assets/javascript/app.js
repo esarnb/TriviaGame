@@ -171,6 +171,7 @@ function endGame() {
         else {
             correction.fadeIn("slow")
             stats.empty()
+            yesno.fadeOut("slow")
             correction.text("Thanks for playing!")
         }
     });
