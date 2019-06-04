@@ -154,6 +154,7 @@ function endGame() {
     correction.fadeOut("slow").empty()
     question.fadeOut("slow").empty()
     answers.fadeOut("slow").empty()
+    time.fadeOut("slow")
     yesno.fadeIn("slow")
     stats.append(`<p> Correct Answers: ${wins} Missed Questions: ${10-wins}`)
     correction.text("Would you like to play again?")
@@ -165,6 +166,7 @@ function endGame() {
             beginGame();
             stats.empty()
             yesno.fadeOut("slow")
+            time.fadeIn("slow")
         }
         else {
             correction.fadeIn("slow")

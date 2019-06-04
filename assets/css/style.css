@@ -49,6 +49,8 @@ header {
     font-family: 'Permanent Marker', cursive;
     margin-top: 15px;
     font-size: 20px;
+    color: #00ffff;
+    font-weight: bolder;
 }
 
 #time {
@@ -61,7 +63,9 @@ header {
     font-family: 'Permanent Marker', cursive;
 }
 
-
+div {
+    z-index: 1;
+}
 
 
 
