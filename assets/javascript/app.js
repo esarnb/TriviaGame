@@ -5,6 +5,9 @@ var question = $("#question");
 var answers = $( "label" );
 var countdownInterval, endTheGame = false;
 var wins = 0, position = -1;
+var yes = $("#yes")
+var no = $("#no")
+var stats = $("#stats")
 
 //Questions
 var questions = [
@@ -119,7 +122,7 @@ function updateQuestion() {
 function beginCountdown() {
     //Reset existing interval
     clearInterval(countdownInterval);
-    var counterNumber = 30;
+    var counterNumber = 1;
 
     //Set a new counter per question
     countdownInterval = setInterval(function(){
@@ -134,7 +137,7 @@ function beginCountdown() {
             
             setTimeout(function() {
                 updateQuestion()
-            }, 5000)
+            }, 1000)
         }
     }, 1000)
 }
@@ -151,11 +154,20 @@ function endGame() {
     correction.empty()
     question.empty()
     answers.empty()
-    //if they say yes, run questions again with position=0
 
+    stats.append("<p> Correct Answers: " + wins + "<br>" + "Missed Questions: " + 10 - wins)
+    //if they say yes, run questions again with position=0
+    correction.text("Would you like to play again?")
+
+    yes.fadeIn("slow")
+    no.fadeIn("slow")
+
+    
     //else run a page refresh to show main menu.
 }
 
+yes.fadeOut("fast")
+no.fadeOut("fast")
 $(document).ready(function() {
     $("#begin").on("click", function() {
         $(this).fadeOut("slow");
