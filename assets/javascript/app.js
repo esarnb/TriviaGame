@@ -5,8 +5,7 @@ var question = $("#question");
 var answers = $( "label" );
 var countdownInterval, endTheGame = false;
 var wins = 0, position = -1;
-var yes = $("#yes")
-var no = $("#no")
+var yesno = $(".yesno")
 var stats = $("#stats")
 
 //Questions
@@ -72,6 +71,7 @@ function beginGame() {
     time.fadeIn("slow")
     answers.fadeIn("slow")
     question.fadeIn("slow")
+    
 
     answers.css("visibility", "visible")
     
@@ -122,7 +122,7 @@ function updateQuestion() {
 function beginCountdown() {
     //Reset existing interval
     clearInterval(countdownInterval);
-    var counterNumber = 1;
+    var counterNumber = 30;
 
     //Set a new counter per question
     countdownInterval = setInterval(function(){
@@ -137,7 +137,7 @@ function beginCountdown() {
             
             setTimeout(function() {
                 updateQuestion()
-            }, 1000)
+            }, 5000)
         }
     }, 1000)
 }
@@ -151,23 +151,34 @@ function endGame() {
     //Gate to stop clicks
     endTheGame = true;
     //Clear all, display PlayAgain message and stats.
-    correction.empty()
-    question.empty()
-    answers.empty()
-
-    stats.append("<p> Correct Answers: " + wins + "<br>" + "Missed Questions: " + 10 - wins)
-    //if they say yes, run questions again with position=0
+    correction.fadeOut("slow").empty()
+    question.fadeOut("slow").empty()
+    answers.fadeOut("slow").empty()
+    yesno.fadeIn("slow")
+    stats.append(`<p> Correct Answers: ${wins} Missed Questions: ${10-wins}`)
     correction.text("Would you like to play again?")
-
-    yes.fadeIn("slow")
-    no.fadeIn("slow")
+    $(".yesno").on("click", function(evt) {
+        var choice = $(this).attr("value");
+        if (choice === "yes") {
+            position = -1;
+            correction.fadeIn()
+            beginGame();
+            stats.empty()
+            yesno.fadeOut("slow")
+        }
+        else {
+            correction.fadeIn("slow")
+            stats.empty()
+            correction.text("Thanks for playing!")
+        }
+    });
+    yesno.fadeIn("slow")
 
     
     //else run a page refresh to show main menu.
 }
 
-yes.fadeOut("fast")
-no.fadeOut("fast")
+yesno.fadeOut("fast")
 $(document).ready(function() {
     $("#begin").on("click", function() {
         $(this).fadeOut("slow");

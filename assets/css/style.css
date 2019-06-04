@@ -17,7 +17,7 @@ ul {
     list-style: none;
 }
 
-li {
+li, .yesno {
     margin: 25px 0px;
     font-family: 'Merienda', cursive;
     font-size: 20px;
@@ -34,7 +34,7 @@ label {
     opacity: 0.6
 }
 
-label:hover {
+label:hover, .yesno:hover {
     opacity: 1;
     color: #00ffff;
     font-weight: bolder;
