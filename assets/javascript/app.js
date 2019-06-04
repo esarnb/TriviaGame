@@ -155,13 +155,13 @@ function endGame() {
     question.fadeOut("slow").empty()
     answers.fadeOut("slow").empty()
     time.fadeOut("slow")
-    yesno.fadeIn("slow")
     stats.append(`<p> Correct Answers: ${wins} Missed Questions: ${10-wins}`)
     correction.text("Would you like to play again?")
     $(".yesno").on("click", function(evt) {
         var choice = $(this).attr("value");
         if (choice === "yes") {
             position = -1;
+            wins = 0;
             correction.fadeIn()
             beginGame();
             stats.empty()
@@ -174,6 +174,7 @@ function endGame() {
             correction.text("Thanks for playing!")
         }
     });
+    yesno.fadeIn("slow")
     yesno.fadeIn("slow")
 
     
