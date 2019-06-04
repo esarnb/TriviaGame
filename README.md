@@ -4,11 +4,13 @@
 
 Welcome to Galactic Trivia Mania! There are 10 questions in total based on our universe and space history!
 
-To try out the game, you play play a [deployment](https://esarnb.github.io/TriviaGame/)
+To try out the game, you may play a [deployment](https://esarnb.github.io/TriviaGame/)
 
 ## Getting Started
 
-To play this on your local machine, you may download all folders and the index.html. Open the index.html with your preferred browser to start playing the game.
+To deploy this on your local machine, you may download all folders and the index.html. Open the index.html with your preferred browser to start playing the game.
+
+You must have a valid internet connection in order to load JQuery libraries (dynamic editing for webpages).
 
 ### Installing
 
