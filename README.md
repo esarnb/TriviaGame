@@ -30,3 +30,5 @@ That's it!
 
 * **Esar Behlum** 
 
+## Acknowledgments
+* Interactive background created by [Tiffany Rayside](https://codepen.io/tmrDevelops/pen/epeBGa)
